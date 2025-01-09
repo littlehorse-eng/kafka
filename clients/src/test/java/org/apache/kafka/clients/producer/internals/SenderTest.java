@@ -588,8 +588,7 @@ public class SenderTest {
             // Verify node is throttled a little bit. In real-life Apache Kafka, we observe that this can happen
             // as done above by throttling or with a disconnect / backoff.
             long currentPollDelay = client.pollDelayMs(nodeToThrottle, startTime);
-            assertTrue(currentPollDelay > 0);
-            assertTrue(currentPollDelay == throttleTimeMs);
+            assertEquals(currentPollDelay, throttleTimeMs);
 
             txnManager.beginTransaction();
             txnManager.maybeAddPartition(tp0);
